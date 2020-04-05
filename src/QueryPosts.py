@@ -2,7 +2,7 @@ import argparse
 import pathlib
 import json
 from datetime import datetime
-from utils import make_soup
+from src.utils import make_soup
 
 # CONSTANTS
 city = 'lancaster'

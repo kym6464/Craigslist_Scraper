@@ -6,7 +6,7 @@ import argparse
 import pathlib
 import json
 
-from utils import strip_html_tags
+from src.utils import strip_html_tags
 
 
 def preprocess(data):

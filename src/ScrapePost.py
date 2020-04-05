@@ -4,7 +4,7 @@ import json
 from multiprocessing import Pool
 from urllib.parse import urlparse
 from bs4 import NavigableString, Tag
-from utils import make_soup
+from src.utils import make_soup
 
 
 def get_city(url):
