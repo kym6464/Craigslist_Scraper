@@ -6,7 +6,8 @@ import logging
 import sys
 import argparse
 import re
-import requests
+import aiohttp
+import asyncio
 from bs4 import BeautifulSoup
 from urllib.parse import urlparse, ParseResult
 from src.utils import update_dict
@@ -43,9 +44,9 @@ def construct_url(state: str) -> str:
     return url
 
 
-def has_redirect(response: requests.Response) -> bool:
+def has_redirect(response: aiohttp.ClientResponse) -> bool:
     """ Check if a response has a redirect in its history """
-    return any([r.status_code == 302 for r in response.history])
+    return any([r.status == 302 for r in response.history])
 
 
 def show_results(results):
@@ -55,7 +56,7 @@ def show_results(results):
         city_urls = {cu[0]: cu[1] for cu in cityname_urls}
         results_dict[st] = city_urls
 
-    print(json.dumps(results_dict, indent=4))
+    print(json.dumps(results_dict, indent=4, default=str))
 
 
 # =========================================== Core ===============================================
@@ -74,28 +75,30 @@ def extract_city(url: str) -> str:
     return city
 
 
-def get_city_links(state: str) -> list:
+async def get_city_links(state: str) -> list:
     # download page for this state
     url = construct_url(state)
-    response = requests.get(url)
+    async with aiohttp.ClientSession() as session:
+        async with session.get(url) as response:
+            # redirect means this state has a single page
+            if has_redirect(response):
+                name = extract_city(str(response.url))
+                return [(name, response.url)]
 
-    # redirect means this state has a single page
-    if has_redirect(response):
-        name = extract_city(response.url)
-        return [(name, response.url)]
-
-    # otherwise look for the URLs of each city
-    soup = BeautifulSoup(response.content, 'lxml')
-    lines = soup.body.div.section.div.ul
-    cityname_link = [(a.get_text(), a['href']) for a in lines.findAll('a', href=True)]
-    return cityname_link
+            # otherwise look for the URLs of each city
+            soup = BeautifulSoup(await response.text(), 'html.parser')
+            lines = soup.body.div.section.div.ul
+            cityname_link = [(a.get_text(), a['href']) for a in lines.findAll('a', href=True)]
+            return cityname_link
 
 
-def main():
+# =========================================== Main ===============================================
+async def main():
+    """ Gather cities by state and print results """
     results = {}
     for st in states:
         try:
-            city_links = get_city_links(st)
+            city_links = await get_city_links(st)
             results[st] = city_links
         except Exception:
             logging.error(f"Error for state: {st}", exc_info=True)
@@ -113,4 +116,5 @@ if __name__ == '__main__':
     if args.file:
         sys.stdout = open(args.file, 'w+')
 
-    main()
+    # run the program
+    asyncio.run(main())
