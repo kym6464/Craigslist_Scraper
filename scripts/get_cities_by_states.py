@@ -51,12 +51,9 @@ def has_redirect(response: aiohttp.ClientResponse) -> bool:
 
 def show_results(results):
     """ Show results as JSON """
-    results_dict = {}
-    for st, cityname_urls in results.items():
-        city_urls = {cu[0]: cu[1] for cu in cityname_urls}
-        results_dict[st] = city_urls
-
-    print(json.dumps(results_dict, indent=4, default=str))
+    state_city_links = {state: {city: link for city,link in city_links}
+                        for state,city_links in results}
+    print(json.dumps(state_city_links, indent=4, default=str))
 
 
 # =========================================== Core ===============================================
@@ -93,15 +90,20 @@ async def get_city_links(state: str) -> list:
 
 
 # =========================================== Main ===============================================
+async def get_city_links_wrapper(state):
+    try:
+        res = await get_city_links(state)
+        return state, res  # add run identifier (state name) to return
+    except Exception:
+        logging.error(f"Error for state: {state}", exc_info=True)
+
+
 async def main():
-    """ Gather cities by state and print results """
-    results = {}
-    for st in states:
-        try:
-            city_links = await get_city_links(st)
-            results[st] = city_links
-        except Exception:
-            logging.error(f"Error for state: {st}", exc_info=True)
+    # schedule the async tasks
+    tasks = [asyncio.create_task(get_city_links_wrapper(s)) for s in states]
+    # wait for all tasks to finish
+    results = await asyncio.gather(*tasks)
+    # gather results and write to file
     show_results(results)
 
 
