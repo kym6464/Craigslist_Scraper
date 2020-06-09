@@ -1,3 +1,4 @@
+import datetime
 import requests
 from bs4 import BeautifulSoup
 
@@ -22,3 +23,8 @@ def strip_html_tags(text):
     soup = BeautifulSoup(text, "lxml")
     stripped_text = soup.get_text(separator=" ")
     return stripped_text
+
+
+def get_timestamp() -> str:
+    """ Get current datetime for appending to filename """
+    return datetime.datetime.now().strftime("%d-%m-%Y_%I-%M-%S%p")

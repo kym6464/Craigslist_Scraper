@@ -14,21 +14,32 @@ def get_city(url):
     return city
 
 
-def get_description(soup):
+def get_description(soup) -> str:
+    """
+    Extract description from a post.
+    :param soup: of post details page
+    :return: description text
+    """
     children = soup.body.section.section.section.section.children
     strings = [c for c in children if isinstance(c, NavigableString)]
     desc = ''.join(strings)
     return desc
 
 
-def get_attributes(soup):
+def get_attributes(soup) -> dict:
+    """
+    Extract attributes from a post.
+    :param soup: of post details page
+    :return: {condition, make/manufacturer, mobileOS, ...}
+    """
     attributes = soup.find_all('p', 'attrgroup')[0]
     # extract field,value pairs
     field_value = {}
     for attr in attributes:
         if isinstance(attr, Tag):
             text = attr.get_text(strip=True)
-            if len(text) == 0: continue
+            if len(text) == 0:
+                continue
             parts = text.split(':')
             if len(parts) == 0:
                 continue
@@ -42,10 +53,14 @@ def get_attributes(soup):
     return field_value
 
 
-def get_post_info(link):
-    print(link)
-    city = get_city(link)
-    soup = make_soup(link)
+def get_post_details(url: str) -> dict:
+    """
+    Extract details from a craigslist post link.
+    :param url: Link to a post
+    :return: {title, price, ...}
+    """
+    city = get_city(url)
+    soup = make_soup(url)
     desc = get_description(soup)
     attributes = get_attributes(soup)
     pd = {
@@ -59,7 +74,7 @@ def get_post_info(link):
 def scrape_all_posts(data):
     post_links = [d['link'] for d in data]
     with Pool() as p:
-        all_post_data = p.map(get_post_info, post_links)
+        all_post_data = p.map(get_post_details, post_links)
     return all_post_data
 
 
