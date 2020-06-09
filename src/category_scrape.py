@@ -1,5 +1,6 @@
 """
-Scrape posts for a category under the "for sale" section - e.g. "cell phones".
+Scrape posts for a category under the "for sale" section - e.g. "cell phones" - for given state
+and city.
 """
 import asyncio
 import json
@@ -154,6 +155,7 @@ async def main(state, city, category):
     # Save post detailed info.
     out_path_detail = result_dir.joinpath(f'{timestamp}_DETAIL.json')
     write_data(post_details, out_path_detail)
+
     # Log
     print(f"Saved overviews to:\t {out_path_overview}")
     print(f"Saved details to:\t {out_path_detail}")
