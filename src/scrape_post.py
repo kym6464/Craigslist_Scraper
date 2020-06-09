@@ -32,7 +32,10 @@ def get_attributes(soup) -> dict:
     :param soup: of post details page
     :return: {condition, make/manufacturer, mobileOS, ...}
     """
-    attributes = soup.find_all('p', 'attrgroup')[0]
+    attributes = soup.find_all('p', 'attrgroup')
+    if not attributes:
+        return {}
+    attributes = attributes[0]
     # extract field,value pairs
     field_value = {}
     for attr in attributes:
