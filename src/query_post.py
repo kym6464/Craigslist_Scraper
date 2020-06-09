@@ -17,30 +17,38 @@ def create_url(query):
     return url
 
 
+def extract_overview_info(search_result_post):
+    """
+    Extract overview information from a search result post entry.
+    :param search_result_post: A single post search result
+    :return: {title, link, pid, ...}
+    """
+    # extract data
+    title_attr = search_result_post.find('a', class_='result-title hdrlnk')
+    link = title_attr['href']
+    title = title_attr.get_text()
+    pid = search_result_post['data-pid']
+    pid_repost = search_result_post['data-repost-of'] if 'data-repost-of' in search_result_post.attrs else None
+    price_str = search_result_post.find(class_='result-price').get_text(strip=True)
+    price = int(''.join([p for p in price_str if p.isdigit()]))
+    time = search_result_post.find('time', class_='result-date')['datetime']
+    # save data
+    entry = {
+        'title': title,
+        'link': link,
+        'pid': pid,
+        'pid_repost': pid_repost,
+        'price': price,
+        'time': time
+    }
+    return entry
+
+
 def get_post_data(posts):
     post_data = []
     for p in posts:
-        # extract data
-        title_attr = p.find('a', class_='result-title hdrlnk')
-        link = title_attr['href']
-        title = title_attr.get_text()
-        pid = p['data-pid']
-        pid_repost = p['data-repost-of'] if 'data-repost-of' in p.attrs else None
-        price_str = p.find(class_='result-price').get_text(strip=True)
-        price = int(''.join([p for p in price_str if p.isdigit()]))
-        time = p.find('time', class_='result-date')['datetime']
-
-        # save data
-        entry = {
-            'title': title,
-            'link': link,
-            'pid': pid,
-            'pid_repost': pid_repost,
-            'price': price,
-            'time': time
-        }
+        entry = extract_overview_info(p)
         post_data.append(entry)
-
     return post_data
 
 
