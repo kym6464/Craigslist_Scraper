@@ -11,7 +11,7 @@ import aiohttp
 
 from bs4 import BeautifulSoup
 from src.query_post import extract_overview_info
-from src.scrape_post import get_city, get_description, get_attributes
+from src.scrape_post import get_city, get_description, get_attributes, get_images
 from src.utils import get_timestamp
 
 # ========================================== CONSTANTS ===========================================
@@ -82,10 +82,12 @@ async def get_post_details(url: str, session: aiohttp.ClientSession) -> dict:
     soup = await url_to_soup(url, session)
     desc = get_description(soup)
     attributes = get_attributes(soup)
+    images = get_images(soup)
     pd = {
         'city': city,
         'description': desc,
-        'attributes': attributes
+        'attributes': attributes,
+        'images': images
     }
     return pd
 

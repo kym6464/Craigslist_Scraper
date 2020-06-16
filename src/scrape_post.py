@@ -1,9 +1,10 @@
 import argparse
 import pathlib
 import json
+from typing import List
 from multiprocessing import Pool
 from urllib.parse import urlparse
-from bs4 import NavigableString, Tag
+from bs4 import BeautifulSoup, NavigableString, Tag
 from src.utils import make_soup
 
 
@@ -14,7 +15,7 @@ def get_city(url):
     return city
 
 
-def get_description(soup) -> str:
+def get_description(soup: BeautifulSoup) -> str:
     """
     Extract description from a post.
     :param soup: of post details page
@@ -26,7 +27,7 @@ def get_description(soup) -> str:
     return desc
 
 
-def get_attributes(soup) -> dict:
+def get_attributes(soup: BeautifulSoup) -> dict:
     """
     Extract attributes from a post.
     :param soup: of post details page
@@ -56,6 +57,29 @@ def get_attributes(soup) -> dict:
     return field_value
 
 
+def get_images(soup: BeautifulSoup) -> List[str]:
+    """
+    Extract image URLs from a post.
+    :param soup: of post details page
+    :return: [url] if 1 or more images found, otherwise []
+    """
+    # Grab list of images. Only works with posts which have a scrollable
+    # gallery (e.g. 2 or more images)
+    images = soup.find_all('a', {'data-imgid': True})
+    image_urls = [e['href'] for e in images]
+    # First grab header image from scrollable gallery, bc the next step
+    # will not catch a post with a single image.
+    if not image_urls:
+        first_visible = soup.find('div', {'class': 'slide first visible'})
+        if first_visible:
+            main_image = first_visible.find('img')
+            if main_image:
+                url = main_image.get('src')
+                if url:
+                    image_urls.append(url)
+    return image_urls
+
+
 def get_post_details(url: str) -> dict:
     """
     Extract details from a craigslist post link.
@@ -66,10 +90,12 @@ def get_post_details(url: str) -> dict:
     soup = make_soup(url)
     desc = get_description(soup)
     attributes = get_attributes(soup)
+    images = get_images(soup)
     pd = {
         'city': city,
         'description': desc,
-        'attributes': attributes
+        'attributes': attributes,
+        'images': images
     }
     return pd
 
