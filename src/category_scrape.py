@@ -11,7 +11,7 @@ import aiohttp
 from bs4 import BeautifulSoup
 from src.query_post import extract_overview_info
 from src.scrape_post import get_city, get_description, get_attributes, get_images
-from src.utils import get_project_root, get_timestamp
+from src.utils import get_project_root, get_timestamp, to_valid_filename
 
 # ========================================== CONSTANTS ===========================================
 # root directory
@@ -56,6 +56,26 @@ async def url_to_soup(url: str, session: aiohttp.ClientSession) -> BeautifulSoup
     """ Download webpage, package as BeautifulSoup """
     async with session.get(url) as response:
         return BeautifulSoup(await response.text(), 'html.parser')
+
+
+async def write_results(state: str, city: str, category: str,
+                        post_overviews: list, post_details: list) -> None:
+    """ Write result posts to files. """
+    # Ensure all values are compatible with a Path.
+    state, city, category = map(to_valid_filename, [state, city, category])
+    # Initialize output directories.
+    result_dir = out_dir.joinpath(category, state, city)
+    result_dir.mkdir(parents=True, exist_ok=True)
+    # Save post overviews.
+    timestamp = get_timestamp()
+    out_path_overview = result_dir.joinpath(f'{timestamp}_OVERVIEW.json')
+    write_data(post_overviews, out_path_overview)
+    # Save post detailed info.
+    out_path_detail = result_dir.joinpath(f'{timestamp}_DETAIL.json')
+    write_data(post_details, out_path_detail)
+    # Log
+    print(f"Saved overviews to:\t {out_path_overview}")
+    print(f"Saved details to:\t {out_path_detail}")
 
 # ========================================== WORKERS =============================================
 async def get_post_overviews(url: str, session: aiohttp.ClientSession) -> list:
@@ -144,7 +164,6 @@ async def scrape_category_location(state: str, city: str, category: str) -> Tupl
 
 async def scrape_category_state(state: str, category: str) -> dict:
     """
-    # TODO untested
     Scrape all posts in a category within all cities in the given state.
     :param state: State abbreviation.
     :param category: a 'for sale' category, e.g. 'cell phones'
@@ -155,7 +174,7 @@ async def scrape_category_state(state: str, category: str) -> dict:
     if not city_to_url:
         raise ValueError(f"Invalid state abbreviation: {state}")
     # Run for each city
-    cities = city_to_url.keys()
+    cities = list(city_to_url.keys())
     tasks = [asyncio.create_task(scrape_category_location(state, city, category))
              for city in cities]
     # Package result per-city. From the docs: "The order of result values
@@ -177,24 +196,20 @@ async def scrape_category_all(category: str) -> Tuple[list, list]:
 
 # ============================================ MAIN ==============================================
 async def main(state, city, category):
-    # Get posts.
-    post_overviews, post_details = await scrape_category_location(state, city, category)
+    # If city is given, search only that city
+    if city:
+        # Get posts for this city.
+        results = await scrape_category_location(state, city, category)
+        city_results = {city: results}
+    # Otherwise city is not given. Search all cities within the state.
+    else:
+        # Get posts for each city.
+        city_results = await scrape_category_state(state, category)
 
-    # Initialize output directories.
-    result_dir = out_dir.joinpath(category, state, city)
-    result_dir.mkdir(parents=True, exist_ok=True)
-
-    # Save post overviews.
-    timestamp = get_timestamp()
-    out_path_overview = result_dir.joinpath(f'{timestamp}_OVERVIEW.json')
-    write_data(post_overviews, out_path_overview)
-    # Save post detailed info.
-    out_path_detail = result_dir.joinpath(f'{timestamp}_DETAIL.json')
-    write_data(post_details, out_path_detail)
-
-    # Log
-    print(f"Saved overviews to:\t {out_path_overview}")
-    print(f"Saved details to:\t {out_path_detail}")
+    # Write results. NOTE: Performance hit of this step is insignificant
+    # compared to previous step, so we do not need aiofiles.
+    for city,(post_overviews, post_details) in city_results.items():
+        await write_results(state, city, category, post_overviews, post_details)
 
 
 if __name__ == '__main__':
@@ -202,7 +217,8 @@ if __name__ == '__main__':
     desc = "Scrape posts under a 'for sale' category, within a city."
     parser = argparse.ArgumentParser(description=desc)
     parser.add_argument('state', help='State abbreviation')
-    parser.add_argument('city', help='City name within given state')
+    parser.add_argument('city', nargs='?', help='City name within given state.'
+        ' If excluded, will search all cities in state.')
     parser.add_argument('category', help="A 'for sale' category, e.g. 'electronics'")
     args = parser.parse_args()
 

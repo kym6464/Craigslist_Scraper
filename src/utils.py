@@ -1,3 +1,5 @@
+import re
+import unicodedata
 import datetime
 import requests
 from bs4 import BeautifulSoup
@@ -7,6 +9,29 @@ from pathlib import Path
 def get_project_root() -> Path:
     """Returns project root folder."""
     return Path(__file__).parent.parent
+
+
+def to_valid_filename(value: str, lowercase=False, allow_unicode=False) -> str:
+    """
+    Convert string to a valid filename using simplified version of Django's
+    "slugify" function.
+
+    Convert spaces or repeated dashes to single dashes. Remove characters that
+    aren't alphanumerics, underscores, or hyphens. Also strip leading and
+    trailing whitespace, dashes, and underscores.
+    :param lowercase: Convert to lowercase if 'lowercase' is True.
+    :param value: string to make a valid filename from.
+    :param allow_unicode: Convert to ASCII if 'allow_unicode' is False.
+    :return valid filename.
+    """
+    if allow_unicode:
+        value = unicodedata.normalize('NFKC', value)
+    else:
+        value = unicodedata.normalize('NFKD', value).encode('ascii', 'ignore').decode('ascii')
+    if lowercase:
+        value = value.lower()
+    value = re.sub(r'[^\w\s-]', '', value)
+    return re.sub(r'[-\s]+', '-', value).strip('-_')
 
 
 def update_dict(base: dict, **kwargs) -> dict:
