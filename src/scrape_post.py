@@ -67,8 +67,7 @@ def get_images(soup: BeautifulSoup) -> List[str]:
     # gallery (e.g. 2 or more images)
     images = soup.find_all('a', {'data-imgid': True})
     image_urls = [e['href'] for e in images]
-    # First grab header image from scrollable gallery, bc the next step
-    # will not catch a post with a single image.
+    # If there is no scrollable gallery, there may still be a single image.
     if not image_urls:
         first_visible = soup.find('div', {'class': 'slide first visible'})
         if first_visible:

@@ -19,7 +19,6 @@ from src.utils import get_timestamp
 out_dir = Path(r'../data/category')
 
 # base URL for search by "for sale" category
-# net_loc = r'https://lancaster.craigslist.org'  # TEMP
 url_path_template = r'{baseUrl}/d/{catName}/search/{catAbbr}'
 
 # read state,city --> URL mapping
