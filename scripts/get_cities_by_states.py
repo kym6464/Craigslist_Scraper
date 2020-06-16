@@ -49,11 +49,25 @@ def has_redirect(response: aiohttp.ClientResponse) -> bool:
     return any([r.status == 302 for r in response.history])
 
 
-def show_results(results):
-    """ Show results as JSON """
-    state_city_links = {state: {city: link for city,link in city_links}
+def post_process(results: list) -> dict:
+    """
+    Post-process the results. Performs the following:
+        1. Lower-case all city names.
+        2. Package as nested dict by state --> city --> URL.
+    :param results: [ (state, [city, URL] ]
+    :return: {state: {city: URL}}
+    """
+    state_city_links = {state: {city.lower(): link for city,link in city_links}
                         for state,city_links in results}
-    print(json.dumps(state_city_links, indent=4, default=str))
+    return state_city_links
+
+
+def show_results(results: dict) -> None:
+    """
+    Show results as JSON.
+    :param results: {state: {city: URL}}
+    """
+    print(json.dumps(results, indent=4, default=str))
 
 
 # =========================================== Core ===============================================
@@ -103,6 +117,8 @@ async def main():
     tasks = [asyncio.create_task(get_city_links_wrapper(s)) for s in states]
     # wait for all tasks to finish
     results = await asyncio.gather(*tasks)
+    # post-process results
+    results = post_process(results)
     # gather results and write to file
     show_results(results)
 

@@ -2,7 +2,7 @@
     "AL": {
         "auburn": "https://auburn.craigslist.org",
         "birmingham": "https://bham.craigslist.org",
-        "columbus, GA": "https://columbusga.craigslist.org",
+        "columbus, ga": "https://columbusga.craigslist.org",
         "dothan": "https://dothan.craigslist.org",
         "florence / muscle shoals": "https://shoals.craigslist.org",
         "gadsden-anniston": "https://gadsden.craigslist.org",
@@ -32,7 +32,7 @@
         "fort smith": "https://fortsmith.craigslist.org",
         "jonesboro": "https://jonesboro.craigslist.org",
         "little rock": "https://littlerock.craigslist.org",
-        "memphis, TN": "https://memphis.craigslist.org",
+        "memphis, tn": "https://memphis.craigslist.org",
         "texarkana": "https://texarkana.craigslist.org"
     },
     "CA": {
@@ -58,7 +58,7 @@
         "san luis obispo": "https://slo.craigslist.org",
         "santa barbara": "https://santabarbara.craigslist.org",
         "santa maria": "https://santamaria.craigslist.org",
-        "SF bay area": "https://sfbay.craigslist.org",
+        "sf bay area": "https://sfbay.craigslist.org",
         "siskiyou county": "https://siskiyou.craigslist.org",
         "stockton": "https://stockton.craigslist.org",
         "susanville": "https://susanville.craigslist.org",
@@ -70,17 +70,17 @@
         "boulder": "https://boulder.craigslist.org",
         "colorado springs": "https://cosprings.craigslist.org",
         "denver": "https://denver.craigslist.org",
-        "eastern CO": "https://eastco.craigslist.org",
-        "fort collins / north CO": "https://fortcollins.craigslist.org",
+        "eastern co": "https://eastco.craigslist.org",
+        "fort collins / north co": "https://fortcollins.craigslist.org",
         "high rockies": "https://rockies.craigslist.org",
         "pueblo": "https://pueblo.craigslist.org",
         "western slope": "https://westslope.craigslist.org"
     },
     "CT": {
-        "eastern CT": "https://newlondon.craigslist.org",
+        "eastern ct": "https://newlondon.craigslist.org",
         "hartford": "https://hartford.craigslist.org",
         "new haven": "https://newhaven.craigslist.org",
-        "northwest CT": "https://nwct.craigslist.org",
+        "northwest ct": "https://nwct.craigslist.org",
         "fairfield county": "//newyork.craigslist.org/fct/"
     },
     "DC": {
@@ -92,12 +92,12 @@
     "FL": {
         "daytona beach": "https://daytona.craigslist.org",
         "florida keys": "https://keys.craigslist.org",
-        "ft myers / SW florida": "https://fortmyers.craigslist.org",
+        "ft myers / sw florida": "https://fortmyers.craigslist.org",
         "gainesville": "https://gainesville.craigslist.org",
         "heartland florida": "https://cfl.craigslist.org",
         "jacksonville": "https://jacksonville.craigslist.org",
         "lakeland": "https://lakeland.craigslist.org",
-        "north central FL": "https://lakecity.craigslist.org",
+        "north central fl": "https://lakecity.craigslist.org",
         "ocala": "https://ocala.craigslist.org",
         "okaloosa / walton": "https://okaloosa.craigslist.org",
         "orlando": "https://orlando.craigslist.org",
@@ -119,7 +119,7 @@
         "brunswick": "https://brunswick.craigslist.org",
         "columbus": "https://columbusga.craigslist.org",
         "macon / warner robins": "https://macon.craigslist.org",
-        "northwest GA": "https://nwga.craigslist.org",
+        "northwest ga": "https://nwga.craigslist.org",
         "savannah / hinesville": "https://savannah.craigslist.org",
         "statesboro": "https://statesboro.craigslist.org",
         "valdosta": "https://valdosta.craigslist.org"
@@ -143,12 +143,12 @@
         "la salle co": "https://lasalle.craigslist.org",
         "mattoon-charleston": "https://mattoon.craigslist.org",
         "peoria": "https://peoria.craigslist.org",
-        "quad cities, IA/IL": "https://quadcities.craigslist.org",
+        "quad cities, ia/il": "https://quadcities.craigslist.org",
         "rockford": "https://rockford.craigslist.org",
         "southern illinois": "https://carbondale.craigslist.org",
         "springfield": "https://springfieldil.craigslist.org",
-        "st louis, MO": "https://stlouis.craigslist.org",
-        "western IL": "https://quincy.craigslist.org"
+        "st louis, mo": "https://stlouis.craigslist.org",
+        "western il": "https://quincy.craigslist.org"
     },
     "IN": {
         "bloomington": "https://bloomington.craigslist.org",
@@ -172,31 +172,31 @@
         "iowa city": "https://iowacity.craigslist.org",
         "mason city": "https://masoncity.craigslist.org",
         "omaha / council bluffs": "https://omaha.craigslist.org",
-        "quad cities, IA/IL": "https://quadcities.craigslist.org",
+        "quad cities, ia/il": "https://quadcities.craigslist.org",
         "sioux city": "https://siouxcity.craigslist.org",
-        "southeast IA": "https://ottumwa.craigslist.org",
+        "southeast ia": "https://ottumwa.craigslist.org",
         "waterloo / cedar falls": "https://waterloo.craigslist.org"
     },
     "KS": {
-        "kansas city, MO": "https://kansascity.craigslist.org",
+        "kansas city, mo": "https://kansascity.craigslist.org",
         "lawrence": "https://lawrence.craigslist.org",
         "manhattan": "https://ksu.craigslist.org",
-        "northwest KS": "https://nwks.craigslist.org",
+        "northwest ks": "https://nwks.craigslist.org",
         "salina": "https://salina.craigslist.org",
-        "southeast KS": "https://seks.craigslist.org",
-        "southwest KS": "https://swks.craigslist.org",
+        "southeast ks": "https://seks.craigslist.org",
+        "southwest ks": "https://swks.craigslist.org",
         "topeka": "https://topeka.craigslist.org",
         "wichita": "https://wichita.craigslist.org"
     },
     "KY": {
         "bowling green": "https://bgky.craigslist.org",
-        "cincinnati, OH": "https://cincinnati.craigslist.org",
+        "cincinnati, oh": "https://cincinnati.craigslist.org",
         "eastern kentucky": "https://eastky.craigslist.org",
         "huntington-ashland": "https://huntington.craigslist.org",
         "lexington": "https://lexington.craigslist.org",
         "louisville": "https://louisville.craigslist.org",
         "owensboro": "https://owensboro.craigslist.org",
-        "western KY": "https://westky.craigslist.org"
+        "western ky": "https://westky.craigslist.org"
     },
     "LA": {
         "baton rouge": "https://batonrouge.craigslist.org",
@@ -219,14 +219,14 @@
         "frederick": "https://frederick.craigslist.org",
         "southern maryland": "https://smd.craigslist.org",
         "western maryland": "https://westmd.craigslist.org",
-        "MD suburbs of DC": "//washingtondc.craigslist.org/mld/"
+        "md suburbs of dc": "//washingtondc.craigslist.org/mld/"
     },
     "MA": {
         "boston": "https://boston.craigslist.org",
         "cape cod / islands": "https://capecod.craigslist.org",
         "south coast": "https://southcoast.craigslist.org",
         "western massachusetts": "https://westernmass.craigslist.org",
-        "worcester / central MA": "https://worcester.craigslist.org"
+        "worcester / central ma": "https://worcester.craigslist.org"
     },
     "MI": {
         "ann arbor": "https://annarbor.craigslist.org",
@@ -257,17 +257,17 @@
         "mankato": "https://mankato.craigslist.org",
         "minneapolis / st paul": "https://minneapolis.craigslist.org",
         "rochester": "https://rmn.craigslist.org",
-        "southwest MN": "https://marshall.craigslist.org",
+        "southwest mn": "https://marshall.craigslist.org",
         "st cloud": "https://stcloud.craigslist.org"
     },
     "MS": {
         "gulfport / biloxi": "https://gulfport.craigslist.org",
         "hattiesburg": "https://hattiesburg.craigslist.org",
         "jackson": "https://jackson.craigslist.org",
-        "memphis, TN": "https://memphis.craigslist.org",
+        "memphis, tn": "https://memphis.craigslist.org",
         "meridian": "https://meridian.craigslist.org",
         "north mississippi": "https://northmiss.craigslist.org",
-        "southwest MS": "https://natchez.craigslist.org"
+        "southwest ms": "https://natchez.craigslist.org"
     },
     "MO": {
         "columbia / jeff city": "https://columbiamo.craigslist.org",
@@ -296,7 +296,7 @@
         "north platte": "https://northplatte.craigslist.org",
         "omaha / council bluffs": "https://omaha.craigslist.org",
         "scottsbluff / panhandle": "https://scottsbluff.craigslist.org",
-        "sioux city, IA": "https://siouxcity.craigslist.org"
+        "sioux city, ia": "https://siouxcity.craigslist.org"
     },
     "NV": {
         "elko": "https://elko.craigslist.org",
@@ -307,11 +307,11 @@
         "nh": "https://nh.craigslist.org"
     },
     "NJ": {
-        "central NJ": "https://cnj.craigslist.org",
+        "central nj": "https://cnj.craigslist.org",
         "jersey shore": "https://jerseyshore.craigslist.org",
         "north jersey": "https://newjersey.craigslist.org",
         "south jersey": "https://southjersey.craigslist.org",
-        "NJ suburbs of NYC": "//newyork.craigslist.org/jsy/"
+        "nj suburbs of nyc": "//newyork.craigslist.org/jsy/"
     },
     "NM": {
         "albuquerque": "https://albuquerque.craigslist.org",
@@ -339,7 +339,7 @@
         "potsdam-canton-massena": "https://potsdam.craigslist.org",
         "rochester": "https://rochester.craigslist.org",
         "syracuse": "https://syracuse.craigslist.org",
-        "twin tiers NY/PA": "https://twintiers.craigslist.org",
+        "twin tiers ny/pa": "https://twintiers.craigslist.org",
         "utica-rome-oneida": "https://utica.craigslist.org",
         "watertown": "https://watertown.craigslist.org"
     },
@@ -347,13 +347,13 @@
         "asheville": "https://asheville.craigslist.org",
         "boone": "https://boone.craigslist.org",
         "charlotte": "https://charlotte.craigslist.org",
-        "eastern NC": "https://eastnc.craigslist.org",
+        "eastern nc": "https://eastnc.craigslist.org",
         "fayetteville": "https://fayetteville.craigslist.org",
         "greensboro": "https://greensboro.craigslist.org",
         "hickory / lenoir": "https://hickory.craigslist.org",
         "jacksonville": "https://onslow.craigslist.org",
         "outer banks": "https://outerbanks.craigslist.org",
-        "raleigh / durham / CH": "https://raleigh.craigslist.org",
+        "raleigh / durham / ch": "https://raleigh.craigslist.org",
         "wilmington": "https://wilmington.craigslist.org",
         "winston-salem": "https://winstonsalem.craigslist.org"
     },
@@ -384,9 +384,9 @@
         "zanesville / cambridge": "https://zanesville.craigslist.org"
     },
     "OK": {
-        "fort smith, AR": "https://fortsmith.craigslist.org",
+        "fort smith, ar": "https://fortsmith.craigslist.org",
         "lawton": "https://lawton.craigslist.org",
-        "northwest OK": "https://enid.craigslist.org",
+        "northwest ok": "https://enid.craigslist.org",
         "oklahoma city": "https://oklahomacity.craigslist.org",
         "stillwater": "https://stillwater.craigslist.org",
         "texoma": "https://texoma.craigslist.org",
@@ -418,7 +418,7 @@
         "reading": "https://reading.craigslist.org",
         "scranton / wilkes-barre": "https://scranton.craigslist.org",
         "state college": "https://pennstate.craigslist.org",
-        "twin tiers NY/PA": "https://twintiers.craigslist.org",
+        "twin tiers ny/pa": "https://twintiers.craigslist.org",
         "williamsport": "https://williamsport.craigslist.org",
         "york": "https://york.craigslist.org"
     },
@@ -434,10 +434,10 @@
         "myrtle beach": "https://myrtlebeach.craigslist.org"
     },
     "SD": {
-        "northeast SD": "https://nesd.craigslist.org",
-        "pierre / central SD": "https://csd.craigslist.org",
-        "rapid city / west SD": "https://rapidcity.craigslist.org",
-        "sioux falls / SE SD": "https://siouxfalls.craigslist.org",
+        "northeast sd": "https://nesd.craigslist.org",
+        "pierre / central sd": "https://csd.craigslist.org",
+        "rapid city / west sd": "https://rapidcity.craigslist.org",
+        "sioux falls / se sd": "https://siouxfalls.craigslist.org",
         "south dakota": "https://sd.craigslist.org"
     },
     "TN": {
@@ -472,10 +472,10 @@
         "san angelo": "https://sanangelo.craigslist.org",
         "san antonio": "https://sanantonio.craigslist.org",
         "san marcos": "https://sanmarcos.craigslist.org",
-        "southwest TX": "https://bigbend.craigslist.org",
+        "southwest tx": "https://bigbend.craigslist.org",
         "texarkana": "https://texarkana.craigslist.org",
         "texoma": "https://texoma.craigslist.org",
-        "tyler / east TX": "https://easttexas.craigslist.org",
+        "tyler / east tx": "https://easttexas.craigslist.org",
         "victoria": "https://victoriatx.craigslist.org",
         "waco": "https://waco.craigslist.org",
         "wichita falls": "https://wichitafalls.craigslist.org"
@@ -501,7 +501,7 @@
         "norfolk / hampton roads": "https://norfolk.craigslist.org",
         "richmond": "https://richmond.craigslist.org",
         "roanoke": "https://roanoke.craigslist.org",
-        "southwest VA": "https://swva.craigslist.org",
+        "southwest va": "https://swva.craigslist.org",
         "winchester": "https://winchester.craigslist.org",
         "northern virginia": "//washingtondc.craigslist.org/nva/"
     },
@@ -513,11 +513,11 @@
         "olympic peninsula": "https://olympic.craigslist.org",
         "pullman / moscow": "https://pullman.craigslist.org",
         "seattle-tacoma": "https://seattle.craigslist.org",
-        "skagit / island / SJI": "https://skagit.craigslist.org",
+        "skagit / island / sji": "https://skagit.craigslist.org",
         "spokane / coeur d'alene": "https://spokane.craigslist.org",
         "wenatchee": "https://wenatchee.craigslist.org",
         "yakima": "https://yakima.craigslist.org",
-        "clark co / SW WA": "//portland.craigslist.org/clk/"
+        "clark co / sw wa": "//portland.craigslist.org/clk/"
     },
     "WV": {
         "charleston": "https://charlestonwv.craigslist.org",
@@ -526,11 +526,11 @@
         "morgantown": "https://morgantown.craigslist.org",
         "northern panhandle": "https://wheeling.craigslist.org",
         "parkersburg-marietta": "https://parkersburg.craigslist.org",
-        "southern WV": "https://swv.craigslist.org",
+        "southern wv": "https://swv.craigslist.org",
         "west virginia (old)": "https://wv.craigslist.org"
     },
     "WI": {
-        "appleton-oshkosh-FDL": "https://appleton.craigslist.org",
+        "appleton-oshkosh-fdl": "https://appleton.craigslist.org",
         "duluth / superior": "https://duluth.craigslist.org",
         "eau claire": "https://eauclaire.craigslist.org",
         "green bay": "https://greenbay.craigslist.org",
@@ -539,7 +539,7 @@
         "la crosse": "https://lacrosse.craigslist.org",
         "madison": "https://madison.craigslist.org",
         "milwaukee": "https://milwaukee.craigslist.org",
-        "northern WI": "https://northernwi.craigslist.org",
+        "northern wi": "https://northernwi.craigslist.org",
         "sheboygan": "https://sheboygan.craigslist.org",
         "wausau": "https://wausau.craigslist.org"
     },
