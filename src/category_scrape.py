@@ -4,7 +4,6 @@ and city.
 """
 import asyncio
 import json
-from pathlib import Path
 from typing import Tuple
 
 import aiohttp
@@ -12,22 +11,25 @@ import aiohttp
 from bs4 import BeautifulSoup
 from src.query_post import extract_overview_info
 from src.scrape_post import get_city, get_description, get_attributes, get_images
-from src.utils import get_timestamp
+from src.utils import get_project_root, get_timestamp
 
 # ========================================== CONSTANTS ===========================================
+# root directory
+root_dir = get_project_root()
+
 # directory for overview and detail posts
-out_dir = Path(r'../data/category')
+out_dir = root_dir.joinpath('data/category')
 
 # base URL for search by "for sale" category
 url_path_template = r'{baseUrl}/d/{catName}/search/{catAbbr}'
 
 # read state,city --> URL mapping
-location_urls = '../config/city_url_by_state.json'
+location_urls = root_dir.joinpath('config/city_url_by_state.json')
 with open(location_urls, 'r') as f:
     state_city_to_url = json.load(f)
 
 # read category names and abbreviations
-file_abbreviations = '../config/category_abbreviations.json'
+file_abbreviations = root_dir.joinpath('config/category_abbreviations.json')
 with open(file_abbreviations, 'r') as f:
     cat_abbr = json.load(f)
 
@@ -138,6 +140,39 @@ async def scrape_category_location(state: str, city: str, category: str) -> Tupl
     base_url = state_city_to_url[state][city]
     # return results
     return await scrape_category(base_url, category)
+
+
+async def scrape_category_state(state: str, category: str) -> dict:
+    """
+    # TODO untested
+    Scrape all posts in a category within all cities in the given state.
+    :param state: State abbreviation.
+    :param category: a 'for sale' category, e.g. 'cell phones'
+    :return: {city_name: ( [post_overview], [post_detail] )}
+    """
+    # Validate input argument
+    city_to_url = state_city_to_url.get(state, None)
+    if not city_to_url:
+        raise ValueError(f"Invalid state abbreviation: {state}")
+    # Run for each city
+    cities = city_to_url.keys()
+    tasks = [asyncio.create_task(scrape_category_location(state, city, category))
+             for city in cities]
+    # Package result per-city. From the docs: "The order of result values
+    # corresponds to the order of awaitables".
+    results = await asyncio.gather(*tasks)
+    city_result = {cities[i]: res for i,res in enumerate(results)}
+    return city_result
+
+
+async def scrape_category_all(category: str) -> Tuple[list, list]:
+    """
+    TODO due to memory limitations, this should not return all results at once.
+    Scrape all posts in a category within all of the US.
+    :param category: a 'for sale' category, e.g. 'cell phones'
+    :return: ( [post_overview], [post_detail] )
+    """
+    pass
 
 
 # ============================================ MAIN ==============================================
